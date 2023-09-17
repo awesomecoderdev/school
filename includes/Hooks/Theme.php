@@ -47,18 +47,18 @@ register_nav_menus(array(
  */
 function add_class_on_nav_menu_list_items($classes, $item, $args)
 {
-    if ('primary' === $args->theme_location) {
-        $classes[] = "nav__item " . "nav_" . strtolower($item->title);
-    }
+    // if ('primary' === $args->theme_location) {
+    //     $classes[] = strtolower($item->title);
+    // }
+    $classes[] = strtolower($item->title);
 
-    if (!in_array('active-link', $classes)) {
-        if (!in_array('current-menu-item', $classes)) {
-            if (in_array('current_page_item', $classes)) {
-                $classes[] = 'active-link ';
-            }
-        } else {
-            $classes[] = 'active-link ';
+
+    if (!in_array('current-menu-item', $classes)) {
+        if (in_array('current_page_item', $classes)) {
+            $classes[] = 'text-primary-500 dark:text-white';
         }
+    } else {
+        $classes[] = 'text-primary-500 dark:text-white';
     }
 
     return $classes;
@@ -73,10 +73,11 @@ add_filter("nav_menu_css_class", "add_class_on_nav_menu_list_items", 10, 3);
  */
 function add_class_on_nav_menu_list_items_link($classes, $item, $args)
 {
-    if ('primary' === $args->theme_location) {
+    // if ('primary' === $args->theme_location) {
+    //     $classes["class"] = "relative flex justify-center items-center";
+    // }
+    $classes["class"] = "relative flex justify-center items-center";
 
-        $classes["class"] = "nav__link ";
-    }
     return $classes;
 }
 add_filter("nav_menu_link_attributes", "add_class_on_nav_menu_list_items_link", 10, 3);
