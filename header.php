@@ -40,42 +40,22 @@ if (!defined('ABSPATH')) {
 
     <!-- start:header -->
     <header class="relative" id="header">
-        <div class="relative bg-primary-500 h-[72px] md:block hidden">
-            <div class="relative container md:flex hidden justify-between items-center h-full w-full mx-auto">
-                <div class="flex items-center space-x-3 text-slate-100 dark:text-white font-normal leading-normal">
-                    <a href="<?php echo site_url("/categories/woman") ?>"><?php _e("Woman", "school") ?></a>
-                    <a href="<?php echo site_url("/categories/man") ?>"><?php _e("Men", "school") ?></a>
-                    <a href="<?php echo site_url("/categories/kids") ?>"><?php _e("Kids", "school") ?></a>
-                </div>
-                <div class="flex items-center space-x-3 text-slate-100 dark:text-white font-normal leading-normal">
-                    <select name="lang" id="lang" class="bg-transparent outline-none border-none border-transparent outline-transparent focus:outline-none focus-visible:outline-none focus:ring-transparent">
-                        <option value="">UAE</option>
-                    </select>
-                    <a href="#" class="flex justify-center items-center"><?php _e("English", "school") ?>
-                        <svg class="ml-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.99 0C4.47 0 0 4.48 0 10C0 15.52 4.47 20 9.99 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 9.99 0ZM16.92 6H13.97C13.65 4.75 13.19 3.55 12.59 2.44C14.43 3.07 15.96 4.35 16.92 6ZM10 2.04C10.83 3.24 11.48 4.57 11.91 6H8.09C8.52 4.57 9.17 3.24 10 2.04ZM2.26 12C2.1 11.36 2 10.69 2 10C2 9.31 2.1 8.64 2.26 8H5.64C5.56 8.66 5.5 9.32 5.5 10C5.5 10.68 5.56 11.34 5.64 12H2.26ZM3.08 14H6.03C6.35 15.25 6.81 16.45 7.41 17.56C5.57 16.93 4.04 15.66 3.08 14ZM6.03 6H3.08C4.04 4.34 5.57 3.07 7.41 2.44C6.81 3.55 6.35 4.75 6.03 6ZM10 17.96C9.17 16.76 8.52 15.43 8.09 14H11.91C11.48 15.43 10.83 16.76 10 17.96ZM12.34 12H7.66C7.57 11.34 7.5 10.68 7.5 10C7.5 9.32 7.57 8.65 7.66 8H12.34C12.43 8.65 12.5 9.32 12.5 10C12.5 10.68 12.43 11.34 12.34 12ZM12.59 17.56C13.19 16.45 13.65 15.25 13.97 14H16.92C15.96 15.65 14.43 16.93 12.59 17.56ZM14.36 12C14.44 11.34 14.5 10.68 14.5 10C14.5 9.32 14.44 8.66 14.36 8H17.74C17.9 8.64 18 9.31 18 10C18 10.69 17.9 11.36 17.74 12H14.36Z" fill="#F7F8F6" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
         <div class="relative md:block hidden  py-6 ">
             <div class="relative container md:flex hidden justify-between items-center h-auto w-full mx-auto">
-                <div class="lg:w-[60%] w-1/2 relative flex lg:justify-between justify-start items-center space-x-4">
-                    <a href="<?php echo site_url("/") ?>"><img class="h-auto lg:w-[120px] w-20" src="<?php echo url("img/logo.png") ?>" alt="<?php echo bloginfo("title") ?>"></a>
-                    <div class="relative border border-primary-100 text-slate-600 dark:text-white rounded-full py-0.5 px-3 xl:w-[420px] lg:w-96 w-full">
-                        <svg class="absolute left-2.5 top-[50%] translate-y-[-50%]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.7555 20.6065L18.3182 17.2458L18.2376 17.1233C18.0878 16.9742 17.883 16.8902 17.6692 16.8902C17.4554 16.8902 17.2505 16.9742 17.1007 17.1233C14.1795 19.8033 9.67815 19.949 6.58201 17.4637C3.48586 14.9784 2.75567 10.6334 4.87568 7.31017C6.9957 3.98697 11.3081 2.71685 14.9528 4.34214C18.5976 5.96743 20.4438 9.98379 19.267 13.7276C19.1823 13.9981 19.2515 14.2922 19.4487 14.4992C19.6459 14.7062 19.9411 14.7946 20.223 14.7311C20.505 14.6676 20.7309 14.4619 20.8156 14.1914C22.2224 9.74864 20.0977 4.96755 15.8161 2.94106C11.5345 0.914562 6.38084 2.25082 3.68905 6.08542C0.99727 9.92001 1.57518 15.1021 5.04893 18.2795C8.52268 21.4569 13.8498 21.6759 17.5841 18.7949L20.6277 21.7705C20.942 22.0765 21.4502 22.0765 21.7645 21.7705C22.0785 21.4602 22.0785 20.9606 21.7645 20.6503L21.7555 20.6065Z" fill="currentColor" />
-                        </svg>
-                        <form class="relative overflow-hidden m-0 p-0 pl-5" action="<?php echo site_url("/") ?>" method="GET">
-                            <input type="text" name="s" id="" placeholder="search for product" value="<?php echo get_search_query(); ?>" class="bg-transparent outline-none border-none border-transparent outline-transparent focus:outline-none focus-visible:outline-none focus:ring-transparent w-full">
-                        </form>
-                    </div>
+                <div class="w-1/2 relative flex lg:justify-between justify-start items-center space-x-4">
+                    <a href="<?php echo site_url("/") ?>">
+                        <?php if ($logo_id = get_theme_mod('custom_logo')) : ?>
+                            <?php $logo_url = wp_get_attachment_image_url($logo_id, 'full'); ?>
+                            <img class="h-auto lg:w-[120px] w-20" src="<?php echo  $logo_url ?>" alt="<?php echo bloginfo("title") ?>">
+
+                            <!-- // 'full' is the image size; change it to match the size you need (e.g., 'thumbnail', 'medium', 'large', etc.) -->
+                        <?php else : ?>
+                            <img class="h-auto lg:w-[120px] w-20" src="<?php echo url("img/logo.png") ?>" alt="<?php echo bloginfo("title") ?>">
+                        <?php endif; ?>
+                    </a>
                 </div>
 
-                <nav class="lg:w-[40%] w-1/2 relative flex justify-end">
+                <nav class="w-1/2 relative flex justify-end">
                     <ul class="relative flex space-x-4 text-slate-600 dark:text-white">
                         <li>
                             <a href="<?php echo site_url("/my-account") ?>" class="flex justify-center items-center <?php echo school_path("my-account") ? "text-primary-500 dark:text-white" : "" ?>">

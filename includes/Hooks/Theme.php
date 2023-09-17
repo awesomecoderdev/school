@@ -130,7 +130,7 @@ add_theme_support("post-thumbnail");
  *
  * @since    1.0.0
  */
-add_theme_support("custom-header");
+// add_theme_support("custom-header");
 
 /**
  * Register the sidebar theme support for the admin area.
@@ -303,7 +303,7 @@ if (!function_exists("school_wp_customize")) {
         $colors = get_school_theme_colors();
 
         foreach ($colors as $key => $color) {
-            $wp_customize->add_setting("color-primary-$key", array(
+            $wp_customize->add_setting("color-$key", array(
                 "type" => "theme_mod",
                 "default" => "$color",
                 // "transport" => "refresh",
