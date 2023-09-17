@@ -37,7 +37,7 @@
  * @since    1.0.0
  */
 register_nav_menus(array(
-    'primary' => __('( Restaurant ) Primary Menu', 'ac-restaurant'),
+    'primary' => __('( School ) Primary Menu', 'school'),
 ));
 
 /**
@@ -117,7 +117,6 @@ add_theme_support('custom-logo', array(
  */
 add_theme_support("post-thumbnail");
 
-
 /**
  * Register the background theme support for the admin area.
  *
@@ -131,71 +130,185 @@ add_theme_support("post-thumbnail");
  *
  * @since    1.0.0
  */
-add_theme_support("custom-header");
+// add_theme_support("custom-header");
 
 /**
  * Register the sidebar theme support for the admin area.
  *
  * @since    1.0.0
  */
-// function awesomecoder_custom_sidebar()
-// {
-// 	register_sidebar(array(
-// 		'name'          => 'Restaurant Sidebar',
-// 		'id'            => 'awesomecoder_sidebar',
-// 		'description'   => 'Widgets in this area will be shown on all posts and pages.',
-// 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-// 		'after_widget'  => '</li>',
-// 		'before_title'  => '<h2 class="widgettitle">',
-// 		'after_title'   => '</h2>',
-// 	));
-// }
-// add_action('widgets_init', 'awesomecoder_custom_sidebar');
+function school_sidebar()
+{
+    register_sidebar(array(
+        'name'          => __('School Sidebar', "school"),
+        'id'            => 'school_sidebar',
+        'description'   => 'Widgets in this area will be shown on all posts and pages.',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</li>',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    ));
+}
+add_action('widgets_init', 'school_sidebar');
+
 
 /**
- * ======================================================================================
- * 		Woocommerce Theme Support Functions
- * ======================================================================================
- */
-
-/**
- * Register the woocommerce theme support for the admin area.
+ * Register the wordpress customizer
  *
  * @since    1.0.0
  */
-add_theme_support('woocommerce', array(
-    'thumbnail_image_width' => 150,
-    'single_image_width'    => 300,
-    'product_grid'          => array(
-        'default_rows'    => 3,
-        'min_rows'        => 3,
-        'max_rows'        => 5,
-        'default_columns' => 4,
-        'min_columns'     => 3,
-        'max_columns'     => 4,
-    ),
-));
+add_action("customize_register", 'school_wp_customize');
+if (!function_exists("school_wp_customize")) {
+    function school_wp_customize($wp_customize)
+    {
 
 
-/**
- * Enable single product zoom.
- *
- * @since    1.0.0
- */
-add_theme_support('wc-product-gallery-zoom');
+        // start: copyright section ========================================
+
+        /**
+         * Create Customizer Copyright Section
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_section("sec_copyright", array(
+            "title"             => "Copyright Settings",
+            "description"       => "This is copyright section.",
+        ));
+
+        /**
+         * Adding copyright text
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("copyright_text", array(
+            "type" => "theme_mod",
+            "default" => get_bloginfo("title"),
+            "sanitize_callback" => "sanitize_text_field",
+        ));
+        $wp_customize->add_control("copyright_text", array(
+            "label" => "Copyright",
+            "description" => "Please fill the copyright text field.",
+            "section" => "sec_copyright",
+            "type" => "text",
+        ));
 
 
-/**
- * Enable single product lightbox.
- *
- * @since    1.0.0
- */
-add_theme_support('wc-product-gallery-lightbox');
+        /**
+         * adding copyright year
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("copyright_year", array(
+            "type" => "theme_mod",
+            "default" => "",
+            "sanitize_callback" => "sanitize_text_field",
+        ));
+        $wp_customize->add_control("copyright_year", array(
+            "label" => "Year",
+            "description" => "Please fill the copyright year field.",
+            "section" => "sec_copyright",
+            "type" => "number",
+        ));
+
+        // end: copyright section ========================================
 
 
-/**
- * Enable single product slider.
- *
- * @since    1.0.0
- */
-add_theme_support('wc-product-gallery-slider');
+        // start: social section ========================================
+
+        /**
+         * Create Customizer Social Section
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_section("sec_social", array(
+            "title"             => "Social Settings",
+            "description"       => "This is social section.",
+        ));
+
+        /**
+         * Adding facebook link
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("facebook_link", array(
+            "type" => "theme_mod",
+            "default" => "https://facebook.com/",
+        ));
+        $wp_customize->add_control("facebook_link", array(
+            "label" => "Facebok",
+            "description" => "Put here your facebook profile link.",
+            "section" => "sec_social",
+            "type" => "text",
+        ));
+
+
+
+        /**
+         * Adding instagram link
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("instagram_link", array(
+            "type" => "theme_mod",
+            "default" => "https://www.instagram.com/",
+        ));
+        $wp_customize->add_control("instagram_link", array(
+            "label" => "Instagram",
+            "description" => "Put here your instagram profile link.",
+            "section" => "sec_social",
+            "type" => "text",
+        ));
+
+
+
+        /**
+         * Adding twiter link
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("twitter_link", array(
+            "type" => "theme_mod",
+            "default" => "https://twitter.com/",
+        ));
+        $wp_customize->add_control("twitter_link", array(
+            "label" => "Twitter",
+            "description" => "Put here your twitter profile link.",
+            "section" => "sec_social",
+            "type" => "text",
+        ));
+
+        // end: social section ========================================
+
+
+        // start: colors section ========================================
+
+        /**
+         * adding hover color
+         *
+         *
+         *
+         * @since    1.0.0
+         *
+         **/
+        $wp_customize->add_setting("text_color", array(
+            "type" => "theme_mod",
+            "default" => "",
+            "sanitize_callback" => "sanitize_text_field",
+        ));
+        $wp_customize->add_control("text_color", array(
+            "label" => "Text Color",
+            "section" => "colors",
+            "type" => "color",
+        ));
+
+        // end: colors section ========================================
+
+    }
+}
