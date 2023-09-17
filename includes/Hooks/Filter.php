@@ -99,7 +99,7 @@ if (!function_exists("school_body_class")) {
         }
 
         // custom css
-        $classes[] = implode("-page ", school_scheme());
+        $classes[] = implode("-page ", url_scheme());
 
 
         return $classes;

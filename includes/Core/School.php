@@ -9,7 +9,6 @@ use AwesomeCoder\School\Frontend;
 use AwesomeCoder\School\Core\Taxonomies;
 use AwesomeCoder\School\Localization\L18n;
 use AwesomeCoder\School\Core\AjaxController;
-use AwesomeCoder\School\Hooks\Authorization;
 
 class School
 {

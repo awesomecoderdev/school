@@ -2,7 +2,7 @@
 
 namespace AwesomeCoder\School\Hooks;
 
-class Authorization
+class Header
 {
     /**
      * The array of error registered with WordPress.
@@ -71,8 +71,8 @@ class Authorization
     public function init()
     {
         // redirect back to the example
-        $url = filter_var($this->redirect_uri, FILTER_SANITIZE_URL);
-        exit(wp_redirect($url));
+        // $url = filter_var($this->redirect_uri, FILTER_SANITIZE_URL);
+        // exit(wp_redirect($url));
         // throw $th;
     }
 
@@ -103,9 +103,9 @@ class Authorization
      */
     public function redirect_to()
     {
-        $url = filter_var($this->redirect_uri, FILTER_SANITIZE_URL);
-        exit(wp_redirect($url));
+        // $url = filter_var($this->redirect_uri, FILTER_SANITIZE_URL);
+        // exit(wp_redirect($url));
     }
 }
 
-new Authorization();
+new Header();

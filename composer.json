@@ -9,9 +9,9 @@
 			"AwesomeCoder\\School\\": "includes/"
 		},
 		"files": [
-			"includes/Hooks/Authorization.php",
 			"includes/Hooks/Taxonomies.php",
 			"includes/Hooks/Filter.php",
+			"includes/Hooks/Header.php",
 			"includes/Hooks/Action.php",
 			"includes/Core/helper.php"
 		]
