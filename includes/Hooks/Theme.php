@@ -130,26 +130,28 @@ add_theme_support("post-thumbnail");
  *
  * @since    1.0.0
  */
-// add_theme_support("custom-header");
+add_theme_support("custom-header");
 
 /**
  * Register the sidebar theme support for the admin area.
  *
  * @since    1.0.0
  */
-function school_sidebar()
-{
-    register_sidebar(array(
-        'name'          => __('School Sidebar', "school"),
-        'id'            => 'school_sidebar',
-        'description'   => 'Widgets in this area will be shown on all posts and pages.',
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li>',
-        'before_title'  => '<h2 class="widgettitle">',
-        'after_title'   => '</h2>',
-    ));
-}
 add_action('widgets_init', 'school_sidebar');
+if (!function_exists("school_sidebar")) {
+    function school_sidebar()
+    {
+        register_sidebar(array(
+            'name'          => __('School Sidebar', "school"),
+            'id'            => 'school_sidebar',
+            'description'   => 'Widgets in this area will be shown on all posts and pages.',
+            'before_widget' => '<li id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</li>',
+            'before_title'  => '<h2 class="widgettitle">',
+            'after_title'   => '</h2>',
+        ));
+    }
+}
 
 
 /**
@@ -297,18 +299,39 @@ if (!function_exists("school_wp_customize")) {
          * @since    1.0.0
          *
          **/
-        $wp_customize->add_setting("text_color", array(
-            "type" => "theme_mod",
-            "default" => "",
-            "sanitize_callback" => "sanitize_text_field",
-        ));
-        $wp_customize->add_control("text_color", array(
-            "label" => "Text Color",
-            "section" => "colors",
-            "type" => "color",
-        ));
+
+        $colors = get_school_theme_colors();
+
+        foreach ($colors as $key => $color) {
+            $wp_customize->add_setting("color-primary-$key", array(
+                "type" => "theme_mod",
+                "default" => "$color",
+                // "transport" => "refresh",
+                "sanitize_callback" => "sanitize_text_field",
+            ));
+            $wp_customize->add_control("color-$key", array(
+                "label" => __("Primary $key", "school"),
+                "section" => "colors",
+                "type" => "color",
+            ));
+        }
+
 
         // end: colors section ========================================
 
+    }
+}
+
+
+/**
+ * Register header for the output colors.
+ *
+ * @since    1.0.0
+ */
+add_action('customizer_theme_colors', 'school_theme_colors');
+if (!function_exists("school_theme_colors")) {
+    function school_theme_colors()
+    {
+        echo school_get_contents("/template/components/customizer.php");
     }
 }

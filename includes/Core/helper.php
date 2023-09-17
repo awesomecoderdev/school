@@ -421,3 +421,53 @@ if (!function_exists('school_cart_sidebar')) {
         return $output;
     }
 }
+
+/**
+ * The get_school_theme_colors function.
+ *
+ * @link              https://awesomecoder.dev/
+ * @since             1.0.0
+ *
+ */
+if (!function_exists('get_school_theme_colors')) {
+    function get_school_theme_colors()
+    {
+        $colors = [
+            "50" => "#d2e0d3",
+            "100" => "#c2d6c4",
+            "200" => "#b6ceb7",
+            "300" => "#a5bea6",
+            "400" => "#a1bba2",
+            "500" => "#92B193",
+            "600" => "#7E9F82",
+            "700" => "#6A8D72",
+            "800" => "#568B61",
+            "900" => "#407950",
+        ];
+
+        return $colors;
+    }
+}
+
+
+/**
+ * The school_get_contents function.
+ *
+ * @link              https://awesomecoder.dev/
+ * @since             1.0.0
+ *
+ */
+if (!function_exists('school_get_contents')) {
+    function school_get_contents($path = false)
+    {
+        $file = SCHOOL_THEME_PATH . "$path";
+        ob_start();
+        if ($path && file_exists($file)) {
+            require $file;
+        }
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        return $output;
+    }
+}

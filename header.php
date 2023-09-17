@@ -30,6 +30,8 @@ if (!defined('ABSPATH')) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="profile" href="https://gmpg.org/xfn/11">
+    <!-- Trigger the custom action hook -->
+    <?php do_action('customizer_theme_colors'); ?>
     <?php wp_head(); ?>
 </head>
 
