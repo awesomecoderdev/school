@@ -34,7 +34,6 @@ class Frontend
 	 */
 	public function __construct($template_name, $version)
 	{
-
 		$this->template_name = $template_name;
 		$this->version = $version;
 	}

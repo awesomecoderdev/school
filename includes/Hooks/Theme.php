@@ -73,10 +73,13 @@ add_filter("nav_menu_css_class", "add_class_on_nav_menu_list_items", 10, 3);
  */
 function add_class_on_nav_menu_list_items_link($classes, $item, $args)
 {
-    // if ('primary' === $args->theme_location) {
-    //     $classes["class"] = "relative flex justify-center items-center";
-    // }
-    $classes["class"] = "relative flex justify-center items-center";
+    if ('primary' === $args->theme_location || is_null($args->theme_location)) {
+        $classes["class"] = "relative flex justify-center items-center $args->theme_location";
+    }
+
+    // file_put_contents(SCHOOL_THEME_PATH . "/args.txt", json_encode($args, JSON_PRETTY_PRINT));
+
+    // $classes["class"] = "relative flex justify-center items-center $args->theme_location";
 
     return $classes;
 }

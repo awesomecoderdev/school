@@ -16,6 +16,7 @@
  *
  */
 
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -63,7 +64,7 @@ if (!defined('ABSPATH')) {
                             // 'items_wrap'           => '%3$s',
                             'theme_location'       => has_nav_menu('primary') ? 'primary' : null,
                             'menu_class'            => "relative flex space-x-4 text-slate-600 dark:text-white",
-                            // 'walker'               => new Cryptogainers_Nav(),
+                            'walker'               => new \AwesomeCoder\School\SchoolPrimaryMenu(),
                         )
                     );
                     ?>

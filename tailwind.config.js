@@ -9,6 +9,7 @@ module.exports = {
 		"./includes/Hooks/*.php",
 		"./includes/Hooks/*.php",
 		"./template/**/*.php",
+		"./app/*.php",
 		"./*.php",
 	],
 	theme: {

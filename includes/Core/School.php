@@ -121,6 +121,12 @@ class School
 		 */
 		require_once SCHOOL_THEME_PATH . 'app/Frontend/Frontend.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
+		require_once SCHOOL_THEME_PATH . 'app/Frontend/Walker.php';
+
 		$this->loader = new Loader();
 	}
 
