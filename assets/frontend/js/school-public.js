@@ -23,27 +23,18 @@ if (typeof $ === "undefined") {
 
 // progress the operation
 $(document).ready(function () {
-	// // customer login
-	// $("#login-form").validate({
-	// 	rules: {
-	// 		email: {
-	// 			required: true,
-	// 			email: true,
-	// 		},
-	// 		password: {
-	// 			required: true,
-	// 			minlength: 5,
-	// 		},
-	// 	},
-	// 	messages: {
-	// 		password: {
-	// 			required: "Please provide a password",
-	// 			minlength: "Password must be at least 8 characters",
-	// 		},
-	// 		email: "Please enter a valid email address",
-	// 	},
-	// 	submitHandler: function (form) {
-	// 		form = $(form).serialize();
-	// 	},
-	// });
+	function slider() {
+		$(".slider .slider-item:first-child").addClass("active");
+		let active = 0;
+		let banners = $(".slider .slider-item");
+		let slides = banners.length;
+		setInterval(function () {
+			++active;
+			if ((active = active % slides) < 0) active += slides;
+			banners.removeClass("active").eq(active).addClass("active");
+		}, 4000);
+	}
+
+	// call slider
+	slider();
 });

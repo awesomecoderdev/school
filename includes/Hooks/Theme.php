@@ -47,6 +47,10 @@ register_nav_menus(array(
  */
 function add_class_on_nav_menu_list_items($classes, $item, $args)
 {
+
+    // file_put_contents(SCHOOL_THEME_PATH . "/args.txt", json_encode($args, JSON_PRETTY_PRINT));
+    // file_put_contents(SCHOOL_THEME_PATH . "/classes.txt", json_encode($classes, JSON_PRETTY_PRINT));
+    // file_put_contents(SCHOOL_THEME_PATH . "/item_$item->ID.txt", json_encode($item, JSON_PRETTY_PRINT));
     // if ('primary' === $args->theme_location) {
     //     $classes[] = strtolower($item->title);
     // }
@@ -74,7 +78,7 @@ add_filter("nav_menu_css_class", "add_class_on_nav_menu_list_items", 10, 3);
 function add_class_on_nav_menu_list_items_link($classes, $item, $args)
 {
     if ('primary' === $args->theme_location || is_null($args->theme_location)) {
-        $classes["class"] = "relative flex justify-center items-center $args->theme_location";
+        $classes["class"] = "relative flex justify-center items-center $args->theme_location ". $args->has_children ? "text-sm lending-5" : "";
     }
 
     // file_put_contents(SCHOOL_THEME_PATH . "/args.txt", json_encode($args, JSON_PRETTY_PRINT));
@@ -105,8 +109,8 @@ add_theme_support('title-tag');
  * @since    1.0.0
  */
 add_theme_support('custom-logo', array(
-    'height'               => 50,
-    'width'                => 180,
+    'height'               => 120,
+    'width'                => 120,
     'flex-height'          => true,
     'flex-width'           => true,
     'header-text'          => array('site-title', 'site-description'),
@@ -126,7 +130,7 @@ add_theme_support("post-thumbnail");
  *
  * @since    1.0.0
  */
-// add_theme_support("custom-background");
+add_theme_support("custom-background");
 
 
 /**
@@ -336,6 +340,6 @@ add_action('customizer_theme_colors', 'school_theme_colors');
 if (!function_exists("school_theme_colors")) {
     function school_theme_colors()
     {
-        echo school_get_contents("/template/components/customizer.php");
+        echo get_school_contents("/template/components/customizer.php");
     }
 }

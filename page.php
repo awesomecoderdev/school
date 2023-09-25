@@ -25,20 +25,8 @@ if (!defined('ABSPATH')) {
 
 <?php get_header(); ?>
 
-<!-- <p class="text-4xl text-primary-50">Lorem ipsum dolor </p>
-<p class="text-4xl text-primary-100">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-200">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-300">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-400">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-500">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-600">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-700">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-800">Lorem ipsum dolor</p>
-<p class="text-4xl text-primary-900">Lorem ipsum dolor</p>
- -->
-
-
-<main id="main" class="<?php echo school_container("py-10 school-contents"); ?>">
+<!-- school-contents -->
+<main id="main" class="<?php echo school_container("py-10 not-prose"); ?>">
     <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
             <?php the_content(); ?>

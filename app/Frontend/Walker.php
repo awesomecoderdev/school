@@ -21,8 +21,8 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 	 *
 	 * @since    1.0.0
 	 */
-	public $start_lvl_class = "relative w-full h-5 max-w-sm shadow z-50 bg-primary-500";
-
+	// public $start_lvl_class = "relative w-full h-5 max-w-sm shadow z-50 bg-primary-500";
+	public $start_lvl_class = "relative";
 
 	/**
 	 * Start the levels
@@ -32,11 +32,13 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 	public function start_lvl(&$output, $depth = 0, $args = array())
 	{
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent <div class=\"$this->start_lvl_class\">\n";
+		// $output .= "\n$indent <div class=\"$this->start_lvl_class\">\n";
 
-		$output .= "\n$indent <div class=\"relative \"> \n";
-		$output .= "\n$indent <div class=\"rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden\"> \n";
-		$output .= "\n$indent <div class=\"relative grid gap-6 bg-white px-2 py-3 sm:gap-8 sm:p-8\"> \n";
+		// add contents
+		ob_start();
+		require SCHOOL_THEME_PATH . "/template/navigation/start_lvl.php";
+		$output .= ob_get_contents();
+		ob_end_clean();
 	}
 
 
@@ -48,11 +50,13 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 	public function end_lvl(&$output, $depth = 0, $args = array())
 	{
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent </div> \n";
-		$output .= "\n$indent </div> \n";
-		$output .= "\n$indent </div> \n";
+		// add contents
+		ob_start();
+		require SCHOOL_THEME_PATH . "/template/navigation/end_lvl.php";
+		$output .= ob_get_contents();
+		ob_end_clean();
 
-		$output .= "\n$indent </div> \n";
+		// return nothing
 	}
 
 	/**
@@ -76,6 +80,8 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 
 		$class_names = implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
 		$class_names = ' class=" text-base font-medium text-gray-500 hover:text-gray-900 ' . esc_attr($class_names) . '"';
+		$nav_menu_link_class = implode(' ', apply_filters('nav_menu_link_attributes', array_filter($classes), $item, $args));
+
 
 		$id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
 		$id = strlen($id) ? ' id="' . esc_attr($id) . '"' : '';
@@ -86,54 +92,19 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
 		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
-		$attributes .= ($args->has_children) ? ' class="dropdown_item text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false"' : '';
 
 		$item_output = $args->before;
 		// $item_output .= '<a' . $attributes . '>';
 		// $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
 
-		if ($depth == 0) {
-			$attributes .= ' class="relative text-base font-medium text-gray-500 hover:text-gray-900"';
-			$item_output = '<a' . $attributes . '>';
-
-			$item_output .= $args->link_before . __(apply_filters('the_title', $item->title, $item->ID), "cryptogainers") . $args->link_after;
-		} else {
-			$attributes .= ' class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"';
-			$item_output = '<a' . $attributes . '>';
-
-			$cryptogainers_menu_icon = get_post_meta($item->ID, "cryptogainers_menu_icon", true);
-			if (isset($cryptogainers_menu_icon)) {
-				if (isset($cryptogainers_menu_icon) && !empty($cryptogainers_menu_icon)) {
-					$item_output .= html_entity_decode(get_post_meta($item->ID, "cryptogainers_menu_icon", true));
-				} else {
-					$item_output .= "\n$indent <svg class=\"flex-shrink-0 h-6 w-6 text-indigo-600\" x-description=\"Heroicon name: outline/chart-bar\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" aria-hidden=\"true\"> \n";
-					$item_output .= "\n$indent <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z\"></path> \n";
-					$item_output .= "\n$indent </svg> \n";
-				}
-			} else if (isset($args->cryptogainers_menu_icon)) {
-				$item_output .= html_entity_decode($args->cryptogainers_menu_icon);
-			}
-
-
-
-			$item_output .= "\n$indent <div class=\"ml-4\">\n";
-			$item_output .= "\n$indent <p class=\"text-base font-medium text-gray-900\">\n";
-			$item_output .= __(apply_filters('the_title', $item->title, $item->ID), "cryptogainers");
-			$item_output .= "\n$indent </p>\n";
-			$item_output .= "\n$indent </div>\n";
-		}
-
-
-		$drop_icon = "\n$indent <svg class=\"text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n";
-		$drop_icon .= "\n$indent <path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\" /> \n";
-		$drop_icon .= "\n$indent </svg> \n";
-
-		$item_output .= (($depth == 0 || 1) && $args->has_children) ? "$drop_icon </a>" : '</a>';
-		$item_output .= $args->after;
+		// add contents
+		ob_start();
+		require SCHOOL_THEME_PATH . "/template/navigation/start_el.php";
+		$item_output .= ob_get_contents();
+		ob_end_clean();
 
 		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
 	}
-
 
 	/**
 	 * Display the levels
@@ -163,7 +134,6 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 		// descend only when the depth is right and there are childrens for this element
 		if (($max_depth == 0 || $max_depth > $depth + 1) && isset($children_elements[$id])) {
 			foreach ($children_elements[$id] as $child) {
-				$args[0]->cryptogainers_menu_icon = get_post_meta($child->ID, "cryptogainers_menu_icon", true);
 				if (!isset($newlevel)) {
 					$newlevel = true;
 					//start the child delimiter

@@ -24,8 +24,8 @@ if (!defined('ABSPATH')) {
 
 
 <!-- start:footer -->
-<footer id="footer" class="relative bg-primary-500 dark:bg-[#2D2D2D] py-10 md:mt-14 mt-10 text-slate-100 <?php echo wp_is_mobile() ? "md:pb-10 pb-20" : "" ?>">
-
+<footer id="footer" class="relative container mx-auto max-w-5xl border  bg-white">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi eaque quos quidem in voluptas magnam deserunt, soluta quod optio accusantium deleniti corrupti cum possimus rerum. Minus dolores nesciunt animi!</p>
 </footer>
 <!-- end:footer -->
 

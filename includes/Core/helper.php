@@ -362,7 +362,7 @@ if (!function_exists('get_the_categories_image')) {
 if (!function_exists('school_container')) {
     function school_container($extra = "")
     {
-        $default = "relative container prose dark:prose-invert min-h-[calc(60vh-112px)] lg:px-8 sm:px-7 xs:px-5 px-4 xl:overflow-visible overflow-hidden";
+        $default = " container mx-auto max-w-5xl border-x bg-white relative prose dark:prose-invert min-h-[calc(60vh-112px)] lg:px-8 sm:px-7 xs:px-5 px-4 xl:overflow-visible overflow-hidden";
 
         return "$default $extra";
     }
@@ -451,16 +451,16 @@ if (!function_exists('get_school_theme_colors')) {
 
 
 /**
- * The school_get_contents function.
+ * The get_school_contents function.
  *
  * @link              https://awesomecoder.dev/
  * @since             1.0.0
  *
  */
-if (!function_exists('school_get_contents')) {
-    function school_get_contents($path = false)
+if (!function_exists('get_school_contents')) {
+    function get_school_contents($path = false)
     {
-        $file = SCHOOL_THEME_PATH . "$path";
+        $file = $path && strpos("$path", ".php") !== false ? SCHOOL_THEME_PATH . "$path" :  SCHOOL_THEME_PATH . "$path.php";
         ob_start();
         if ($path && file_exists($file)) {
             require $file;
@@ -469,5 +469,41 @@ if (!function_exists('school_get_contents')) {
         ob_end_clean();
 
         return $output;
+    }
+}
+
+/**
+ * The get_school_banners function.
+ *
+ * @link              https://awesomecoder.dev/
+ * @since             1.0.0
+ *
+ */
+if (!function_exists('get_school_banners')) {
+    function get_school_banners(array $extensions = [])
+    {
+        // Initialize an array to store the image file names
+        $imageFiles = [];
+        $directory = SCHOOL_THEME_PATH . "/assets/img/banner";
+        // Define an array of valid image file extensions
+        $defaultExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        $validExtensions = array_merge($defaultExtensions, $extensions);
+
+
+
+        // Get the list of all files in the directory
+        $files = scandir($directory);
+
+        // Loop through the files and check if they have a valid image file extension
+        foreach ($files as $file) {
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+            if (in_array(strtolower($extension), $validExtensions)) {
+                // Add the image file to the array
+                $imageFiles[] = str_replace(" ", "%20", url("img/banner/$file"));
+            }
+        }
+
+        return $imageFiles;
     }
 }

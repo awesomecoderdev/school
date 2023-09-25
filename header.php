@@ -40,23 +40,43 @@ if (!defined('ABSPATH')) {
     <?php wp_body_open(); ?>
 
     <!-- start:header -->
-    <header class="relative" id="header">
-        <div class="relative md:block hidden  py-6 ">
-            <div class="relative container md:flex hidden justify-between items-center h-auto w-full mx-auto">
-                <div class="w-1/2 relative flex lg:justify-between justify-start items-center space-x-4">
+    <header class="relative container mx-auto max-w-5xl border bg-white" id="header">
+        <style>
+            .slider .slider-item {
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 2s ease, visibility 0s ease 2s;
+            }
+
+            .slider .slider-item.active {
+                visibility: visible;
+                opacity: 1;
+                transition: opacity 2s ease;
+            }
+        </style>
+        <div class="slider relative w-full h-56">
+            <?php foreach (get_school_banners() as $key => $banner) : ?>
+                <div class="<?php echo $key == 0 ? "active" : "" ?> slider-item transition-opacity duration-300 ease-in-out absolute h-56 w-full bg-img-cover bg-center" style="background: url(<?php echo $banner; ?>);"> </div>
+            <?php endforeach; ?>
+
+            <div class="relative h-full w-full z-10 flex items-center ">
+                <div class="relative px-10">
                     <a href="<?php echo site_url("/") ?>">
                         <?php if ($logo_id = get_theme_mod('custom_logo')) : ?>
                             <?php $logo_url = wp_get_attachment_image_url($logo_id, 'full'); ?>
-                            <img class="h-auto lg:w-[120px] w-20" src="<?php echo  $logo_url ?>" alt="<?php echo bloginfo("title") ?>">
-
-                            <!-- // 'full' is the image size; change it to match the size you need (e.g., 'thumbnail', 'medium', 'large', etc.) -->
+                            <img class="h-24 w-24" src="<?php echo  $logo_url ?>" alt="<?php echo bloginfo("title") ?>">
                         <?php else : ?>
-                            <img class="h-auto lg:w-[120px] w-20" src="<?php echo url("img/logo.png") ?>" alt="<?php echo bloginfo("title") ?>">
+                            <img class="h-24 w-24" src="<?php echo url("img/logo.png") ?>" alt="<?php echo bloginfo("title") ?>">
                         <?php endif; ?>
                     </a>
+                    <h1 class="text-white text-3xl font-semibold [text-shadow:_2px_2px_2px_#000000,_3px_3px_2px_#000000;]"><?php bloginfo("title") ?></h1>
+                    <h2 class="text-white text-2xl font-semibold [text-shadow:_2px_2px_2px_#000000,_3px_3px_2px_#000000;]"><?php echo get_option('school_address', "কাজীপুর, সিরাজগঞ্জ") ?></h2>
                 </div>
-
-                <nav class="w-1/2 relative flex justify-end">
+            </div>
+        </div>
+        <div class="relative md:block hidden py-6 ">
+            <div class="relative h-auto w-full">
+                <nav class="w-full relative flex justify-start">
                     <?php
                     wp_nav_menu( // show nav
                         array(

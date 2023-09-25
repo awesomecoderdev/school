@@ -142,3 +142,29 @@ function school_taxonomy_save_custom_fields($term_id)
         update_term_meta($term_id, 'color', $color);
     }
 }
+
+
+// Step 1: Create a function to display the custom field
+function custom_settings_field()
+{
+    $custom_field_value = get_option('school_address'); // Retrieve the saved value
+    // Output the HTML for your custom field
+    echo '<input class="regular-text" placeholder="Enter Schools Address" type="text" id="school_address" name="school_address" value="' . esc_attr($custom_field_value) . '" />';
+}
+
+function add_school_address_to_general_settings()
+{
+    add_settings_field(
+        'school_address',
+        __("School Address", "school"),
+        'custom_settings_field',
+        'general',
+        'default',
+        array(
+            'label_for' => 'school_address',
+        )
+    );
+
+    register_setting('general', 'school_address');
+}
+add_action('admin_init', 'add_school_address_to_general_settings');

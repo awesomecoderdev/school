@@ -1,14 +1,14 @@
 {
     "menu": {
-        "term_id": 31,
-        "name": "Menu 1",
-        "slug": "menu-1",
+        "term_id": 65,
+        "name": "Primary",
+        "slug": "primary",
         "term_group": 0,
-        "term_taxonomy_id": 31,
+        "term_taxonomy_id": 65,
         "taxonomy": "nav_menu",
         "description": "",
         "parent": 0,
-        "count": 5,
+        "count": 6,
         "filter": "raw"
     },
     "container": false,
@@ -26,6 +26,21 @@
     "items_wrap": "<ul id=\"%1$s\" class=\"%2$s\">%3$s<\/ul>",
     "item_spacing": "preserve",
     "depth": 0,
-    "walker": "",
-    "theme_location": "primary"
+    "walker": {
+        "tree_type": [
+            "post_type",
+            "taxonomy",
+            "custom"
+        ],
+        "db_fields": {
+            "parent": "menu_item_parent",
+            "id": "db_id"
+        },
+        "max_pages": 1,
+        "has_children": null,
+        "start_lvl_class": "relative"
+    },
+    "theme_location": "primary",
+    "has_children": false,
+    "cryptogainers_menu_icon": ""
 }
