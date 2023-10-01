@@ -37,4 +37,28 @@ $(document).ready(function () {
 
 	// call slider
 	slider();
+
+	// menu
+	$(document).on("mouseover", ".menu-item-has-children ", function (e) {
+		// console.log("e", e);
+		let submenu = $(this).find("#submenu");
+
+		let state = submenu.attr("data-state");
+
+		if (state && state == "closed") {
+			submenu.attr("data-state", "opened");
+		}
+	});
+
+	// menu
+	$(document).on("mouseout", ".menu-item-has-children ", function (e) {
+		// console.log("e", e);
+		let submenu = $(this).find("#submenu");
+
+		let state = submenu.attr("data-state");
+
+		if (state && state == "opened") {
+			submenu.attr("data-state", "closed");
+		}
+	});
 });

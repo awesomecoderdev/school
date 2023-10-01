@@ -96,7 +96,6 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 		$item_output = $args->before;
 		// $item_output .= '<a' . $attributes . '>';
 		// $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-
 		// add contents
 		ob_start();
 		require SCHOOL_THEME_PATH . "/template/navigation/start_el.php";
