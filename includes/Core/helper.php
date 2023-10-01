@@ -362,7 +362,7 @@ if (!function_exists('get_the_categories_image')) {
 if (!function_exists('school_container')) {
     function school_container($extra = "")
     {
-        $default = " container mx-auto max-w-5xl border-x bg-white relative prose dark:prose-invert min-h-[calc(60vh-112px)] lg:px-8 sm:px-7 xs:px-5 px-4 xl:overflow-visible overflow-hidden";
+        $default = " container mx-auto max-w-6xl border-x bg-white relative prose dark:prose-invert min-h-[calc(60vh-112px)] lg:px-4 sm:px-5 xs:px-5 px-4 xl:overflow-visible overflow-hidden";
 
         return "$default $extra";
     }

@@ -218,3 +218,111 @@ figure {
 body.custom-background {
 	background-size: 70px !important;
 }
+
+/* sidebar css */
+
+#sidebar h1,
+#sidebar h2,
+#sidebar h3,
+#sidebar h4,
+#sidebar h5,
+#sidebar h6 {
+	@apply font-semibold bg-primary-500 text-white px-3 py-1.5;
+}
+
+#sidebar img {
+	@apply rounded-sm aspect-[10/6] w-full max-w-full;
+}
+/* aspect-[10/8] */
+#sidebar figure {
+	@apply relative flex rounded-sm aspect-1 w-full max-w-full;
+}
+
+#sidebar figure.aligncenter {
+	@apply justify-center;
+}
+
+#sidebar figure.alignleft {
+	@apply justify-start;
+}
+
+#sidebar figure.alignright {
+	@apply justify-end;
+}
+
+#sidebar .aligncenter {
+	@apply mx-auto;
+}
+
+#sidebar .alignleft {
+	@apply mr-auto;
+}
+
+#sidebar .alignright {
+	@apply ml-auto;
+}
+
+#sidebar ol {
+	list-style: bengali;
+	@apply ml-4;
+}
+
+#sidebar li a {
+	@apply hover:text-primary-500;
+}
+#sidebar ul li a,
+#sidebar ol li a {
+	@apply font-semibold text-sm;
+}
+
+#sidebar ul li a strong,
+#sidebar ol li a strong {
+	@apply text-red-400 hover:text-red-500;
+}
+
+/* contents css */
+#contents table,
+#contents img,
+#contents figure {
+	@apply max-w-full;
+}
+
+#contents h1,
+#contents h2,
+#contents h3,
+#contents h4,
+#contents h5,
+#contents h6 {
+	@apply font-semibold;
+}
+
+#contents h1 {
+	@apply text-3xl py-2;
+}
+#contents h2 {
+	@apply text-2xl py-1.5;
+}
+#contents h3 {
+	@apply text-xl py-1;
+}
+#contents h4 {
+	@apply text-lg py-0.5;
+}
+#contents h5 {
+	@apply text-sm;
+}
+#contents h6 {
+	@apply text-xs;
+}
+
+#contents .aligncenter {
+	@apply mx-auto;
+}
+
+#contents .alignleft {
+	@apply mr-auto;
+}
+
+#contents .alignright {
+	@apply ml-auto;
+}

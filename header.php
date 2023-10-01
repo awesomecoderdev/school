@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) {
     <?php wp_body_open(); ?>
 
     <!-- start:header -->
-    <header class="relative container mx-auto max-w-5xl border bg-white" id="header">
+    <header class="relative lg:px-4 sm:px-5 xs:px-5 px-4 mx-auto max-w-6xl border bg-white" id="header">
         <style>
             .slider .slider-item {
                 visibility: hidden;
