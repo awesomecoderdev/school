@@ -17,7 +17,7 @@
         <?php elseif($depth == 1) : // second child ?>
              <!-- start multiple level menu -->
              <button class="bg-zinc-100/15 hover:bg-zinc-100/50 rounded-lg w-full flex items-center text-sm font-medium leading-5 justify-between transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50 group">
-                <a <?php echo $attributes; ?> class="relative px-2.5 py-2 text-sm font-medium leading-5 text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white group inline-flex items-center justify-center transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50 <?php echo $nav_menu_link_class; ?>">
+                <a <?php echo $attributes; ?> class="relative text-start w-full px-2.5 py-2 text-sm font-medium leading-5 text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white group inline-block items-center justify-start transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50 <?php echo $nav_menu_link_class; ?>">
                     <?php echo $args->link_before . __(apply_filters('the_title', $item->title, $item->ID), "school") . $args->link_after; ?>
                 </a>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="relative top-[1px] ml-1 mr-2 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180" aria-hidden="true">

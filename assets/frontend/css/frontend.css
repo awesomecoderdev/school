@@ -1264,6 +1264,9 @@ body{
 .block{
 	display: block;
 }
+.inline-block{
+	display: inline-block;
+}
 .flex{
 	display: flex;
 }
@@ -1338,6 +1341,12 @@ body{
 }
 .max-w-\[250px\]{
 	max-width: 250px;
+}
+.max-w-\[252px\]{
+	max-width: 252px;
+}
+.max-w-\[255px\]{
+	max-width: 255px;
 }
 @keyframes spin{
 	to{
@@ -1435,6 +1444,9 @@ body{
 .py-6{
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
+}
+.text-start{
+	text-align: start;
 }
 .text-2xl{
 	font-size: 1.5rem;
