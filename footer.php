@@ -24,7 +24,8 @@ if (!defined('ABSPATH')) {
 
 
 <!-- start:footer -->
-<footer id="footer" class="relative lg:px-4 sm:px-5 xs:px-5 px-4 mx-auto max-w-6xl border bg-white">
+<footer id="footer" class="relative lg:px-4 sm:px-5 xs:px-5 px-4 mx-auto max-w-6xl border-x bg-white overflow-hidden">
+    <img class="w-full h-auto py-4 lg:scale-[103%] md:scale-[106%] scale-[112%]" src="<?php echo url("img/footer.png"); ?>" alt="">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi eaque quos quidem in voluptas magnam deserunt, soluta quod optio accusantium deleniti corrupti cum possimus rerum. Minus dolores nesciunt animi!</p>
 </footer>
 <!-- end:footer -->
