@@ -173,6 +173,18 @@ body {
 	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.slider .slider-item {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 2s ease, visibility 0s ease 2s;
+}
+
+.slider .slider-item.active {
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 2s ease;
+}
+
 .has-adminbar {
 	/* @apply mt-4; */
 }
@@ -218,7 +230,6 @@ figure {
 body.custom-background {
 	background-size: 70px !important;
 }
-
 /* sidebar css */
 
 #sidebar h1,
@@ -314,6 +325,9 @@ body.custom-background {
 #contents h6 {
 	@apply text-xs;
 }
+#contents a {
+	@apply text-primary-400 hover:text-primary-500;
+}
 
 #contents .aligncenter {
 	@apply mx-auto;
@@ -325,4 +339,9 @@ body.custom-background {
 
 #contents .alignright {
 	@apply ml-auto;
+}
+
+/* menu css */
+a.current-menu-item.active {
+	@apply text-primary-400 hover:text-primary-500;
 }
