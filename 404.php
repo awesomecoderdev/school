@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
 
 <?php get_header(); ?>
 
-<main id="main" class="<?php echo school_container("py-10"); ?>">
+<main id="main" class="<?php echo school_container("py-4 max-h-[40rem]"); ?>">
     <div class="relative w-full h-full flex  justify-center items-center py-10">
         <div class="relative max-w-sm">
             <svg class="w-96 h-96 text-primary-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500">
@@ -1371,6 +1371,10 @@ if (!defined('ABSPATH')) {
                     <path d="M192.25,331.51a6.1,6.1,0,0,1-1.21.59l-3.35,1.47c-2.82,1.26-6.68,3.09-10.81,5.36s-7.74,4.55-10.31,6.25l-3,2a5.9,5.9,0,0,1-1.15.71,6.73,6.73,0,0,1,1-.87c.68-.54,1.69-1.29,3-2.18a109.87,109.87,0,0,1,21.18-11.65c1.44-.59,2.61-1,3.43-1.32A6.92,6.92,0,0,1,192.25,331.51Z" style="fill:#263238"></path>
                 </g>
             </svg>
+
+            <a class="block w-24 py-0.5 px-2 relative text-center mx-auto border border-primary-500 rounded-full" href="javascript:void(0);" onclick="history.back();">
+                <?php _e("Go Back","school") ?>
+            </a>
         </div>
     </div>
 </main>

@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <?php if (is_active_sidebar('school_sidebar')) : ?>
-	<ul id="sidebar" class="relative space-y-4 ">
+	<ul id="sidebar" class="relative grid lg:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-6">
 		<?php dynamic_sidebar('school_sidebar'); ?>
 	</ul>
 <?php endif; ?>

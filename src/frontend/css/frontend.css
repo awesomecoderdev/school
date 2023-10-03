@@ -246,7 +246,7 @@ body.custom-background {
 }
 /* aspect-[10/8] */
 #sidebar figure {
-	@apply relative flex rounded-sm aspect-1 w-full max-w-full;
+	@apply relative flex rounded-sm aspect-1 w-full max-w-full overflow-hidden;
 }
 
 #sidebar figure.aligncenter {
@@ -289,6 +289,12 @@ body.custom-background {
 #sidebar ul li a strong,
 #sidebar ol li a strong {
 	@apply text-red-400 hover:text-red-500;
+}
+#sidebar .wp-block-heading {
+	@apply mb-4;
+}
+#sidebar .odd.widget:last-child {
+	@apply col-span-2;
 }
 
 /* contents css */

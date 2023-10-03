@@ -35,7 +35,8 @@
  *
  * @since    1.0.0
  */
-if (!function_exists("school_body_class")) {
+add_filter("body_class", "school_body_class", 99999);
+ if (!function_exists("school_body_class")) {
     function school_body_class($classes)
     {
         $include = array(
@@ -105,4 +106,28 @@ if (!function_exists("school_body_class")) {
         return $classes;
     }
 }
-add_filter("body_class", "school_body_class", 99999);
+
+
+/**
+ * Register the nav menu for the admin area.
+ *
+ * @since    1.0.0
+ */
+add_filter('dynamic_sidebar_params','add_odd_even_classes_to_widget');
+if(!function_exists("add_odd_even_classes_to_widget")){
+    function add_odd_even_classes_to_widget($params) {
+        global $my_widget_num;
+        if (!isset($my_widget_num)){
+            $my_widget_num = 1;
+        }else{
+            $my_widget_num++;
+        }
+
+        if ($my_widget_num % 2 == 0) {
+            $params[0]['before_widget'] = str_replace('class="', 'class="even ', $params[0]['before_widget']);
+        } else {
+            $params[0]['before_widget'] = str_replace('class="', 'class="odd ', $params[0]['before_widget']);
+        }
+        return $params;
+    }
+}
