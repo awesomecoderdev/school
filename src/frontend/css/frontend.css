@@ -241,6 +241,35 @@ body.custom-background {
 	@apply font-semibold bg-primary-500 text-white px-3 py-1.5;
 }
 
+#sidebar h1 {
+	@apply text-3xl py-2;
+}
+#sidebar h2 {
+	@apply text-2xl py-1.5;
+}
+#sidebar h3 {
+	@apply text-xl py-1;
+}
+#sidebar h4 {
+	@apply text-lg py-0.5;
+}
+#sidebar h5 {
+	@apply text-sm;
+}
+#sidebar h6 {
+	@apply text-xs;
+}
+/* widget css */
+
+#sidebar h1.wp-block-heading,
+#sidebar h2.wp-block-heading,
+#sidebar h3.wp-block-heading,
+#sidebar h4.wp-block-heading,
+#sidebar h5.wp-block-heading,
+#sidebar h6.wp-block-heading {
+	font-size: 14px !important;
+}
+
 #sidebar img {
 	@apply rounded-sm aspect-[10/6] w-full max-w-full;
 }
@@ -294,7 +323,7 @@ body.custom-background {
 	@apply mb-4;
 }
 #sidebar .odd.widget:last-child {
-	@apply col-span-2;
+	@apply lg:col-span-1 md:col-span-2 col-span-1;
 }
 
 /* contents css */
@@ -348,6 +377,18 @@ body.custom-background {
 }
 
 /* menu css */
+
 a.current-menu-item.active {
-	@apply text-primary-400 hover:text-primary-500;
+	@apply text-primary-500 hover:text-primary-500;
+}
+li.main-menu-item.menu-item {
+	@apply rounded-md bg-zinc-50/50 hover:bg-zinc-100;
+}
+
+li.main-menu-item.menu-item-has-children {
+	@apply pr-2;
+}
+
+li.main-menu-item.current-menu-item.active {
+	@apply bg-zinc-50;
 }

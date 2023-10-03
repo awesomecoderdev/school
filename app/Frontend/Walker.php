@@ -79,6 +79,9 @@ class SchoolPrimaryMenu extends \Walker_Nav_Menu
 		}
 
 		$class_names = implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+		if($depth == 0) {
+			$class_names .= " main-menu-item";
+		}
 		$class_names = ' class=" text-base font-medium text-gray-500 hover:text-gray-900 ' . esc_attr($class_names) . '"';
 		$nav_menu_link_class = implode(' ', apply_filters('nav_menu_link_attributes', array_filter($classes), $item, $args));
 
