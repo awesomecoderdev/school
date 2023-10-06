@@ -112,6 +112,7 @@ if (!defined('ABSPATH')) {
                                 <img class="w-10 rounded-full border border-slate-200 drop-shadow-lg" src="<?php echo url("img/logo.png") ?>" alt="<?php echo bloginfo("title") ?>">
                             <?php endif; ?>
                         </a>
+                        <p class="text-zinc-500 text-xs px-2 truncate max-w-[12rem] font-semibold"><?php bloginfo("title") ?></p>
                         <div id="hamburger" class="md:hidden flex items-center justify-center rounded-lg right-5 top-5 bg-white z-10 h-10 w-10 border border-slate-200 drop-shadow-lg">
                             <button type="button" id="trigger-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="open = true">
                                 <svg class="h-6 w-6 pointer-events-none" id="close-menu" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
