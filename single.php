@@ -36,7 +36,7 @@ if (!defined('ABSPATH')) {
                     <?php endwhile; ?>
                 <?php endif; ?>
             </div>
-            <div class="relative w-full [&>:first-child]:mt-0 [&>:last-child]:mb-0 space-y-5 lg:col-span-3 order-first lg:sticky lg:top-16 md:relative md:top-0">
+            <div class="relative w-full [&>:first-child]:mt-0 [&>:last-child]:mb-0 space-y-5 lg:col-span-3 order-first  lg:sticky lg:top-6 md:relative md:top-0">
                 <?php get_sidebar(); ?>
             </div>
         </div>

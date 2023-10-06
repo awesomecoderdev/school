@@ -61,4 +61,16 @@ $(document).ready(function () {
 			submenu.attr("data-state", "closed");
 		}
 	});
+
+	$(document).on("click", "#trigger-menu", function (e) {
+		e.preventDefault();
+		$("#open-menu").toggleClass("hidden");
+		$("#close-menu").toggleClass("hidden");
+		// $("#hamburger").toggleClass("absolute");
+		// $("#hamburger").toggleClass("fixed");
+
+		//
+		$("#mobile-navigation").toggleClass("hidden");
+		$("#mobile-navigation").toggleClass("fixed");
+	});
 });
