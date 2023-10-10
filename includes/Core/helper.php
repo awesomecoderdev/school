@@ -370,17 +370,17 @@ if (!function_exists('school_container')) {
 
 
 /**
- * The get_school_notices_categoires function.
+ * The get_school_notices function.
  *
  * @link              https://awesomecoder.dev/
  * @since             1.0.0
  *
  */
-if (!function_exists('get_school_notices_categoires')) {
-    function get_school_notices_categoires(array $args = [])
+if (!function_exists('get_school_notices')) {
+    function get_school_notices(array $args = [])
     {
         $default = array(
-            'taxonomy'      => 'notices', // Taxonomy for product categories
+            'taxonomy'      => 'category', // Taxonomy for product categories
             'title_li'      => '', // Remove the default title
             'orderby'       => 'count', // Order by the number of products
             'order'         => 'DESC',  // Descending order (most products first)
@@ -389,6 +389,7 @@ if (!function_exists('get_school_notices_categoires')) {
             'fields'        => 'all',
             'hide_empty'    => false,
             'number'        => 4,
+            'exclude' => get_cat_ID('Uncategorized'),
         );
 
         $args = array_merge($default, $args);
@@ -398,37 +399,7 @@ if (!function_exists('get_school_notices_categoires')) {
         $terms = $categories->terms;
         // $terms = $categories;
 
-        return $terms;
-    }
-}
-
-
-/**
- * The get_school_notices function.
- *
- * @link              https://awesomecoder.dev/
- * @since             1.0.0
- *
- */
-if (!function_exists('get_school_notices')) {
-    function get_school_notices($id = false)
-    {
-        $default =  esc_url(get_theme_mod('custom_logo') ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full') : url("img/logo.png"));
-
-        if ($id) {
-            $color = get_term_meta($id, "color", true);
-
-            if ($color) {
-                return $color;
-            } else {
-                $term = get_term($id);
-                if ($term?->slug) {
-                    $color =  $term?->slug;
-                }
-            }
-        }
-
-        return $color ?? $default;
+        return $terms ?? [];
     }
 }
 

@@ -31,9 +31,15 @@ if (!defined('ABSPATH')) {
         <div class="relative grid items-start gap-x-4 lg:max-w-full py-5 lg:grid-cols-11 md:pt-0 md:gap-y-16 gap-y-5">
             <div id="contents" class="relative lg:overflow-x-hidden overflow-scroll [&>:first-child]:mt-0 [&>:last-child]:mb-0 space-y-5 lg:col-span-8 lg:order-first">
                 <?php if (have_posts()) : ?>
-                    <?php while (have_posts()) : the_post(); ?>
-                        <?php the_content(); ?>
-                    <?php endwhile; ?>
+                    <div class="relative grid gap-4">
+                        <?php while (have_posts()) : the_post(); ?>
+                            <div class="relative  bg-zinc-50/50 p-4 shadow border border-slate-200/50">
+                                <a class="relative w-24 h-24" href="<?php the_permalink(); ?>">
+                                    <img class="relative w-20 h-20" src="<?php echo get_the_post_thumbnail_url() ?get_the_post_thumbnail_url() : url("img/logo.png") ; ?>" alt="<?php the_title(); ?>">
+                                </a>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <div class="relative w-full [&>:first-child]:mt-0 [&>:last-child]:mb-0 space-y-5 lg:col-span-3 order-first lg:sticky lg:top-6 md:relative md:top-0">

@@ -78,7 +78,7 @@ add_filter("nav_menu_css_class", "add_class_on_nav_menu_list_items", 10, 3);
 function add_class_on_nav_menu_list_items_link($classes, $item, $args)
 {
     if ('primary' === $args->theme_location || is_null($args->theme_location)) {
-        $classes["class"] = "relative flex justify-center items-center $args->theme_location ". $args->has_children ? "text-sm lending-5" : "";
+        $classes["class"] = "relative flex justify-center items-center $args->theme_location " . $args->has_children ? "text-sm lending-5" : "";
     }
 
     // file_put_contents(SCHOOL_THEME_PATH . "/args.txt", json_encode($args, JSON_PRETTY_PRINT));
@@ -119,6 +119,22 @@ add_theme_support('custom-logo', array(
 
 
 /**
+ * Gutenberg wide images.
+ *
+ * @since    1.0.0
+ */
+add_theme_support('align-wide');
+
+
+/**
+ *  Add default posts and comments RSS feed links to head.
+ *
+ * @since    1.0.0
+ */
+add_theme_support('automatic-feed-links');
+
+
+/**
  * Register the thumbnail theme support for the admin area.
  *
  * @since    1.0.0
@@ -132,6 +148,35 @@ add_theme_support("post-thumbnail");
  */
 add_theme_support("custom-background");
 
+
+
+/**
+ * Switch default core markup for search form, comment form, and comments.
+ *
+ * @since    1.0.0
+ */
+
+// to output valid HTML5.
+// Added a new value in HTML5 array 'navigation-widgets' as this was introduced in WP5.5 for better accessibility.
+add_theme_support(
+    'html5',
+    array(
+        'navigation-widgets',
+        'search-form',
+        'gallery',
+        'caption',
+        'style',
+        'script',
+    )
+);
+
+/**
+ * Customize Selective Refresh Widgets
+ *
+ * @since    1.0.0
+ */
+
+add_theme_support('customize-selective-refresh-widgets');
 
 /**
  * Register the header theme support for the admin area.
