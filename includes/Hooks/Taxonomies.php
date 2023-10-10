@@ -34,42 +34,40 @@ class Taxonomies
 		return self::$instance;
 	}
 
+    public $placeholder_image;
+
+
 	/**
 	 * Constructor.
 	 */
 	public function __construct()
 	{
 		// Default category ID.
-		$this->default_cat_id = get_option('default_product_tag', 0);
+		$this->default_cat_id = get_option('default_category', 0);
+		$this->placeholder_image = esc_url(get_theme_mod('custom_logo') ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full') : url("img/logo.png"));
 
 		// Category/term ordering.
 		add_action('create_term', array($this, 'create_term'), 5, 3);
-		add_action(
-			'delete_product_tag',
-			function () {
-				wc_get_container()->get(AssignDefaultCategory::class)->schedule_action();
-			}
-		);
 
 		// Add form.
-		add_action('product_tag_add_form_fields', array($this, 'add_category_fields'));
-		add_action('product_tag_edit_form_fields', array($this, 'edit_category_fields'), 10);
+		add_action('category_add_form_fields', array($this, 'add_category_fields'));
+		add_action('category_edit_form_fields', array($this, 'edit_category_fields'), 10);
 		add_action('created_term', array($this, 'save_category_fields'), 10, 3);
 		add_action('edit_term', array($this, 'save_category_fields'), 10, 3);
 
 		// Add columns.
-		add_filter('manage_edit-product_tag_columns', array($this, 'product_tag_columns'));
-		add_filter('manage_product_tag_custom_column', array($this, 'product_tag_column'), 10, 3);
+		add_filter('manage_edit-category_columns', array($this, 'category_columns'));
+		add_filter('manage_category_custom_column', array($this, 'category_column'), 10, 3);
 
 		// Add row actions.
-		add_filter('product_tag_row_actions', array($this, 'product_tag_row_actions'), 10, 2);
-		add_filter('admin_init', array($this, 'handle_product_tag_row_actions'));
+		add_filter('category_row_actions', array($this, 'category_row_actions'), 10, 2);
+		add_filter('admin_init', array($this, 'handle_category_row_actions'));
 
 		// Taxonomy page descriptions.
-		add_action('product_tag_pre_add_form', array($this, 'product_tag_description'));
-		add_action('after-product_tag-table', array($this, 'product_tag_notes'));
+		add_action('category_pre_add_form', array($this, 'category_description'));
+		add_action('after-category-table', array($this, 'category_notes'));
 
-		$attribute_taxonomies = wc_get_attribute_taxonomies();
+		// $attribute_taxonomies = wc_get_attribute_taxonomies();
 
 		if (!empty($attribute_taxonomies)) {
 			foreach ($attribute_taxonomies as $attribute) {
@@ -81,7 +79,7 @@ class Taxonomies
 		add_filter('wp_terms_checklist_args', array($this, 'disable_checked_ontop'));
 
 		// Admin footer scripts for this product categories admin screen.
-		add_action('admin_footer', array($this, 'scripts_at_product_tag_screen_footer'));
+		add_action('admin_footer', array($this, 'scripts_at_category_screen_footer'));
 	}
 
 	/**
@@ -93,22 +91,11 @@ class Taxonomies
 	 */
 	public function create_term($term_id, $tt_id = '', $taxonomy = '')
 	{
-		if ('product_tag' !== $taxonomy && !taxonomy_is_product_attribute($taxonomy)) {
+		if ('category' !== $taxonomy && !taxonomy_is_product_attribute($taxonomy)) {
 			return;
 		}
 
 		update_term_meta($term_id, 'order', 0);
-	}
-
-	/**
-	 * When a term is deleted, delete its meta.
-	 *
-	 * @deprecated 3.6.0 No longer needed.
-	 * @param mixed $term_id Term ID.
-	 */
-	public function delete_term($term_id)
-	{
-		wc_deprecated_function('delete_term', '3.6');
 	}
 
 	/**
@@ -128,15 +115,15 @@ class Taxonomies
 		</div>
 		<div class="form-field term-thumbnail-wrap">
 			<label><?php esc_html_e('Thumbnail', 'woocommerce'); ?></label>
-			<div id="product_tag_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url(wc_placeholder_img_src()); ?>" width="60px" height="60px" /></div>
+			<div id="category_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url($this->placeholder_image); ?>" width="60px" height="60px" /></div>
 			<div style="line-height: 60px;">
-				<input type="hidden" id="product_tag_thumbnail_id" name="product_tag_thumbnail_id" />
+				<input type="hidden" id="category_thumbnail_id" name="category_thumbnail_id" />
 				<button type="button" class="upload_image_button button"><?php esc_html_e('Upload/Add image', 'woocommerce'); ?></button>
 				<button type="button" class="remove_image_button button"><?php esc_html_e('Remove image', 'woocommerce'); ?></button>
 			</div>
 			<script type="text/javascript">
 				// Only show the "remove image" button when needed
-				if (!jQuery('#product_tag_thumbnail_id').val()) {
+				if (!jQuery('#category_thumbnail_id').val()) {
 					jQuery('.remove_image_button').hide();
 				}
 
@@ -167,8 +154,8 @@ class Taxonomies
 						var attachment = file_frame.state().get('selection').first().toJSON();
 						var attachment_thumbnail = attachment.sizes.thumbnail || attachment.sizes.full;
 
-						jQuery('#product_tag_thumbnail_id').val(attachment.id);
-						jQuery('#product_tag_thumbnail').find('img').attr('src', attachment_thumbnail.url);
+						jQuery('#category_thumbnail_id').val(attachment.id);
+						jQuery('#category_thumbnail').find('img').attr('src', attachment_thumbnail.url);
 						jQuery('.remove_image_button').show();
 					});
 
@@ -177,8 +164,8 @@ class Taxonomies
 				});
 
 				jQuery(document).on('click', '.remove_image_button', function() {
-					jQuery('#product_tag_thumbnail').find('img').attr('src', '<?php echo esc_js(wc_placeholder_img_src()); ?>');
-					jQuery('#product_tag_thumbnail_id').val('');
+					jQuery('#category_thumbnail').find('img').attr('src', '<?php echo esc_js($this->placeholder_image); ?>');
+					jQuery('#category_thumbnail_id').val('');
 					jQuery('.remove_image_button').hide();
 					return false;
 				});
@@ -192,8 +179,8 @@ class Taxonomies
 							return;
 						}
 						// Clear Thumbnail fields on submit
-						jQuery('#product_tag_thumbnail').find('img').attr('src', '<?php echo esc_js(wc_placeholder_img_src()); ?>');
-						jQuery('#product_tag_thumbnail_id').val('');
+						jQuery('#category_thumbnail').find('img').attr('src', '<?php echo esc_js($this->placeholder_image); ?>');
+						jQuery('#category_thumbnail_id').val('');
 						jQuery('.remove_image_button').hide();
 						// Clear Display type field on submit
 						jQuery('#display_type').val('');
@@ -220,7 +207,7 @@ class Taxonomies
 		if ($thumbnail_id) {
 			$image = wp_get_attachment_thumb_url($thumbnail_id);
 		} else {
-			$image = wc_placeholder_img_src();
+			$image = $this->placeholder_image;
 		}
 	?>
 		<tr class="form-field term-display-type-wrap">
@@ -237,15 +224,15 @@ class Taxonomies
 		<tr class="form-field term-thumbnail-wrap">
 			<th scope="row" valign="top"><label><?php esc_html_e('Thumbnail', 'woocommerce'); ?></label></th>
 			<td>
-				<div id="product_tag_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url($image); ?>" width="60px" height="60px" /></div>
+				<div id="category_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url($image); ?>" width="60px" height="60px" /></div>
 				<div style="line-height: 60px;">
-					<input type="hidden" id="product_tag_thumbnail_id" name="product_tag_thumbnail_id" value="<?php echo esc_attr($thumbnail_id); ?>" />
+					<input type="hidden" id="category_thumbnail_id" name="category_thumbnail_id" value="<?php echo esc_attr($thumbnail_id); ?>" />
 					<button type="button" class="upload_image_button button"><?php esc_html_e('Upload/Add image', 'woocommerce'); ?></button>
 					<button type="button" class="remove_image_button button"><?php esc_html_e('Remove image', 'woocommerce'); ?></button>
 				</div>
 				<script type="text/javascript">
 					// Only show the "remove image" button when needed
-					if ('0' === jQuery('#product_tag_thumbnail_id').val()) {
+					if ('0' === jQuery('#category_thumbnail_id').val()) {
 						jQuery('.remove_image_button').hide();
 					}
 
@@ -276,8 +263,8 @@ class Taxonomies
 							var attachment = file_frame.state().get('selection').first().toJSON();
 							var attachment_thumbnail = attachment.sizes.thumbnail || attachment.sizes.full;
 
-							jQuery('#product_tag_thumbnail_id').val(attachment.id);
-							jQuery('#product_tag_thumbnail').find('img').attr('src', attachment_thumbnail.url);
+							jQuery('#category_thumbnail_id').val(attachment.id);
+							jQuery('#category_thumbnail').find('img').attr('src', attachment_thumbnail.url);
 							jQuery('.remove_image_button').show();
 						});
 
@@ -286,8 +273,8 @@ class Taxonomies
 					});
 
 					jQuery(document).on('click', '.remove_image_button', function() {
-						jQuery('#product_tag_thumbnail').find('img').attr('src', '<?php echo esc_js(wc_placeholder_img_src()); ?>');
-						jQuery('#product_tag_thumbnail_id').val('');
+						jQuery('#category_thumbnail').find('img').attr('src', '<?php echo esc_js($this->placeholder_image); ?>');
+						jQuery('#category_thumbnail_id').val('');
 						jQuery('.remove_image_button').hide();
 						return false;
 					});
@@ -307,18 +294,18 @@ class Taxonomies
 	 */
 	public function save_category_fields($term_id, $tt_id = '', $taxonomy = '')
 	{
-		if (isset($_POST['display_type']) && 'product_tag' === $taxonomy) { // WPCS: CSRF ok, input var ok.
+		if (isset($_POST['display_type']) && 'category' === $taxonomy) { // WPCS: CSRF ok, input var ok.
 			update_term_meta($term_id, 'display_type', esc_attr($_POST['display_type'])); // WPCS: CSRF ok, sanitization ok, input var ok.
 		}
-		if (isset($_POST['product_tag_thumbnail_id']) && 'product_tag' === $taxonomy) { // WPCS: CSRF ok, input var ok.
-			update_term_meta($term_id, 'thumbnail_id', absint($_POST['product_tag_thumbnail_id'])); // WPCS: CSRF ok, input var ok.
+		if (isset($_POST['category_thumbnail_id']) && 'category' === $taxonomy) { // WPCS: CSRF ok, input var ok.
+			update_term_meta($term_id, 'thumbnail_id', absint($_POST['category_thumbnail_id'])); // WPCS: CSRF ok, input var ok.
 		}
 	}
 
 	/**
-	 * Description for product_tag page to aid users.
+	 * Description for category page to aid users.
 	 */
-	public function product_tag_description()
+	public function category_description()
 	{
 		echo wp_kses(
 			wpautop(__('Product categories for your store can be managed here. To change the order of categories on the front-end you can drag and drop to sort them. To see more categories listed click the "screen options" link at the top-right of this page.', 'woocommerce')),
@@ -329,10 +316,10 @@ class Taxonomies
 	/**
 	 * Add some notes to describe the behavior of the default category.
 	 */
-	public function product_tag_notes()
+	public function category_notes()
 	{
-		$category_id   = get_option('default_product_tag', 0);
-		$category      = get_term($category_id, 'product_tag');
+		$category_id   = get_option('default_category', 0);
+		$category      = get_term($category_id, 'category');
 		$category_name = (!$category || is_wp_error($category)) ? _x('Uncategorized', 'Default category slug', 'woocommerce') : $category->name;
 	?>
 		<div class="form-wrap edit-term-notes">
@@ -367,7 +354,7 @@ class Taxonomies
 	 * @param mixed $columns Columns array.
 	 * @return array
 	 */
-	public function product_tag_columns($columns)
+	public function category_columns($columns)
 	{
 		$new_columns = array();
 
@@ -391,14 +378,14 @@ class Taxonomies
 	 * @param object $term Term object.
 	 * @return array
 	 */
-	public function product_tag_row_actions($actions, $term)
+	public function category_row_actions($actions, $term)
 	{
-		$default_category_id = absint(get_option('default_product_tag', 0));
+		$default_category_id = absint(get_option('default_category', 0));
 
 		if ($default_category_id !== $term->term_id && current_user_can('edit_term', $term->term_id)) {
 			$actions['make_default'] = sprintf(
 				'<a href="%s" aria-label="%s">%s</a>',
-				wp_nonce_url('edit-tags.php?action=make_default&amp;taxonomy=product_tag&amp;post_type=product&amp;tag_ID=' . absint($term->term_id), 'make_default_' . absint($term->term_id)),
+				wp_nonce_url('edit-tags.php?action=make_default&amp;taxonomy=category&amp;post_type=product&amp;tag_ID=' . absint($term->term_id), 'make_default_' . absint($term->term_id)),
 				/* translators: %s: taxonomy term name */
 				esc_attr(sprintf(__('Make &#8220;%s&#8221; the default category', 'woocommerce'), $term->name)),
 				__('Make default', 'woocommerce')
@@ -411,13 +398,13 @@ class Taxonomies
 	/**
 	 * Handle custom row actions.
 	 */
-	public function handle_product_tag_row_actions()
+	public function handle_category_row_actions()
 	{
 		if (isset($_GET['action'], $_GET['tag_ID'], $_GET['_wpnonce']) && 'make_default' === $_GET['action']) { // WPCS: CSRF ok, input var ok.
 			$make_default_id = absint($_GET['tag_ID']); // WPCS: Input var ok.
 
 			if (wp_verify_nonce($_GET['_wpnonce'], 'make_default_' . $make_default_id) && current_user_can('edit_term', $make_default_id)) { // WPCS: Sanitization ok, input var ok, CSRF ok.
-				update_option('default_product_tag', $make_default_id);
+				update_option('default_category', $make_default_id);
 			}
 		}
 	}
@@ -431,22 +418,18 @@ class Taxonomies
 	 *
 	 * @return string
 	 */
-	public function product_tag_column($columns, $column, $id)
+	public function category_column($columns, $column, $id)
 	{
 		if ('thumb' === $column) {
 			// Prepend tooltip for default category.
-			$default_category_id = absint(get_option('default_product_tag', 0));
-
-			if ($default_category_id === $id) {
-				$columns .= wc_help_tip(__('This is the default category and it cannot be deleted. It will be automatically assigned to products with no category.', 'woocommerce'));
-			}
+			$default_category_id = absint(get_option('default_category', 0));
 
 			$thumbnail_id = get_term_meta($id, 'thumbnail_id', true);
 
 			if ($thumbnail_id) {
 				$image = wp_get_attachment_thumb_url($thumbnail_id);
 			} else {
-				$image = wc_placeholder_img_src();
+				$image = $this->placeholder_image;
 			}
 
 			// Prevent esc_url from breaking spaces in urls for image embeds. Ref: https://core.trac.wordpress.org/ticket/23605 .
@@ -467,7 +450,7 @@ class Taxonomies
 	 */
 	public function disable_checked_ontop($args)
 	{
-		if (!empty($args['taxonomy']) && 'product_tag' === $args['taxonomy']) {
+		if (!empty($args['taxonomy']) && 'category' === $args['taxonomy']) {
 			$args['checked_ontop'] = false;
 		}
 		return $args;
@@ -478,19 +461,19 @@ class Taxonomies
 	 *
 	 * @return void
 	 */
-	public function scripts_at_product_tag_screen_footer()
+	public function scripts_at_category_screen_footer()
 	{
-		if (!isset($_GET['taxonomy']) || 'product_tag' !== $_GET['taxonomy']) { // WPCS: CSRF ok, input var ok.
+		if (!isset($_GET['taxonomy']) || 'category' !== $_GET['taxonomy']) { // WPCS: CSRF ok, input var ok.
 			return;
 		}
 		// Ensure the tooltip is displayed when the image column is disabled on product categories.
-		wc_enqueue_js(
-			"(function( $ ) {
-				'use strict';
-				var product_tag = $( 'tr#tag-" . absint($this->default_cat_id) . "' );
-				product_tag.find( 'th' ).empty();
-				product_tag.find( 'td.thumb span' ).detach( 'span' ).appendTo( product_tag.find( 'th' ) );
-			})( jQuery );"
-		);
+		// wc_enqueue_js(
+		// 	"(function( $ ) {
+		// 		'use strict';
+		// 		var category = $( 'tr#tag-" . absint($this->default_cat_id) . "' );
+		// 		category.find( 'th' ).empty();
+		// 		category.find( 'td.thumb span' ).detach( 'span' ).appendTo( category.find( 'th' ) );
+		// 	})( jQuery );"
+		// );
 	}
 }

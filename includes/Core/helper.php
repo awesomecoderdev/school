@@ -370,6 +370,70 @@ if (!function_exists('school_container')) {
 
 
 /**
+ * The get_school_notices_categoires function.
+ *
+ * @link              https://awesomecoder.dev/
+ * @since             1.0.0
+ *
+ */
+if (!function_exists('get_school_notices_categoires')) {
+    function get_school_notices_categoires(array $args = [])
+    {
+        $default = array(
+            'taxonomy'      => 'notices', // Taxonomy for product categories
+            'title_li'      => '', // Remove the default title
+            'orderby'       => 'count', // Order by the number of products
+            'order'         => 'DESC',  // Descending order (most products first)
+            // 'child_of'      => 0,
+            // 'parent'        => 0,
+            'fields'        => 'all',
+            'hide_empty'    => false,
+            'number'        => 4,
+        );
+
+        $args = array_merge($default, $args);
+
+        $categories = new \WP_Term_Query($args);
+        // $terms = get_terms($args);
+        $terms = $categories->terms;
+        // $terms = $categories;
+
+        return $terms;
+    }
+}
+
+
+/**
+ * The get_school_notices function.
+ *
+ * @link              https://awesomecoder.dev/
+ * @since             1.0.0
+ *
+ */
+if (!function_exists('get_school_notices')) {
+    function get_school_notices($id = false)
+    {
+        $default =  esc_url(get_theme_mod('custom_logo') ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full') : url("img/logo.png"));
+
+        if ($id) {
+            $color = get_term_meta($id, "color", true);
+
+            if ($color) {
+                return $color;
+            } else {
+                $term = get_term($id);
+                if ($term?->slug) {
+                    $color =  $term?->slug;
+                }
+            }
+        }
+
+        return $color ?? $default;
+    }
+}
+
+
+/**
  * The school_response function.
  *
  * @link              https://awesomecoder.dev/

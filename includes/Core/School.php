@@ -216,7 +216,7 @@ class School
 	public function run()
 	{
 		$this->loader->run();
-		// Taxonomies::run();
+		Taxonomies::run();
 	}
 
 	/**
