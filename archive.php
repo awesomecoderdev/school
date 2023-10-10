@@ -33,10 +33,15 @@ if (!defined('ABSPATH')) {
                 <?php if (have_posts()) : ?>
                     <div class="relative grid gap-4">
                         <?php while (have_posts()) : the_post(); ?>
-                            <div class="relative  bg-zinc-50/50 p-4 shadow border border-slate-200/50">
-                                <a class="relative w-24 h-24" href="<?php the_permalink(); ?>">
-                                    <img class="relative w-20 h-20" src="<?php echo get_the_post_thumbnail_url() ?get_the_post_thumbnail_url() : url("img/logo.png") ; ?>" alt="<?php the_title(); ?>">
-                                </a>
+                            <div class="relative flex bg-zinc-50/50 p-4 shadow border border-slate-200/50">
+                                <div class="relative w-24 h-24">
+                                    <a class="relative w-24 h-24 block" href="<?php the_permalink(); ?>">
+                                        <img class="relative w-20 h-20 rounded-full drop-shadow-lg" src="<?php echo get_the_thumbnail_url() ; ?>" alt="<?php the_title(); ?>">
+                                    </a>
+                                </div>
+                                <div class="relative">
+                                    <span class="line-clamp-1 font-semibold"><?php the_title() ?></span>
+                                </div>
                             </div>
                         <?php endwhile; ?>
                     </div>
