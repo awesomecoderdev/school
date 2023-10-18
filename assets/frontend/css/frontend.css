@@ -1279,6 +1279,12 @@ body{
 .mb-4{
 	margin-bottom: 1rem;
 }
+.mb-2{
+	margin-bottom: 0.5rem;
+}
+.mb-10{
+	margin-bottom: 2.5rem;
+}
 .line-clamp-1{
 	overflow: hidden;
 	display: -webkit-box;
@@ -1525,6 +1531,11 @@ body{
 	margin-right: calc(0.625rem * var(--tw-space-x-reverse));
 	margin-left: calc(0.625rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-x-3 > :not([hidden]) ~ :not([hidden]){
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden{
 	overflow: hidden;
 }
@@ -1711,6 +1722,12 @@ body{
 }
 .pt-10{
 	padding-top: 2.5rem;
+}
+.pb-2{
+	padding-bottom: 0.5rem;
+}
+.pb-20{
+	padding-bottom: 5rem;
 }
 .text-center{
 	text-align: center;
