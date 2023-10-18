@@ -346,8 +346,10 @@ if (!function_exists('get_the_categories_image')) {
                 return $image;
             }
         }
+        $logo_id = get_theme_mod('custom_logo');
+        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
 
-        return url('img/category/school.png');
+        return $logo_url ?? url('img/category/school.png');
     }
 }
 
@@ -364,12 +366,12 @@ if (!function_exists('get_the_thumbnail_url')) {
     {
         $image = esc_url(get_theme_mod('custom_logo') ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full') : url("img/logo.png"));
 
-        if($id ){
-            if(get_the_post_thumbnail_url($id)){
+        if ($id) {
+            if (get_the_post_thumbnail_url($id)) {
                 $image = get_the_post_thumbnail_url($id);
             }
-        }else{
-            if(get_the_post_thumbnail_url()){
+        } else {
+            if (get_the_post_thumbnail_url()) {
                 $image = get_the_post_thumbnail_url();
             }
         }
