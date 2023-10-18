@@ -1354,6 +1354,9 @@ body{
 .h-40{
 	height: 10rem;
 }
+.h-4{
+	height: 1rem;
+}
 .max-h-\[40rem\]{
 	max-height: 40rem;
 }
@@ -1404,6 +1407,9 @@ body{
 }
 .w-60{
 	width: 15rem;
+}
+.w-4{
+	width: 1rem;
 }
 .max-w-6xl{
 	max-width: 72rem;
@@ -1497,6 +1503,11 @@ body{
 	margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
+.space-x-2 > :not([hidden]) ~ :not([hidden]){
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden{
 	overflow: hidden;
 }
@@ -1519,6 +1530,9 @@ body{
 }
 .rounded-md{
 	border-radius: calc(var(--radius) - 2px);
+}
+.rounded{
+	border-radius: 0.25rem;
 }
 .border{
 	border-width: 1px;
@@ -1566,6 +1580,10 @@ body{
 }
 .bg-zinc-50\/50{
 	background-color: rgb(250 250 250 / 0.5);
+}
+.bg-slate-100{
+	--tw-bg-opacity: 1;
+	background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 .bg-cover{
 	background-size: cover;
