@@ -1254,6 +1254,9 @@ body{
 .-m-2\.5{
 	margin: -0.625rem;
 }
+.m-0{
+	margin: 0px;
+}
 .mx-auto{
 	margin-left: auto;
 	margin-right: auto;
@@ -1272,6 +1275,9 @@ body{
 }
 .mt-1\.5{
 	margin-top: 0.375rem;
+}
+.mb-4{
+	margin-bottom: 1rem;
 }
 .line-clamp-1{
 	overflow: hidden;
@@ -1411,6 +1417,12 @@ body{
 .w-4{
 	width: 1rem;
 }
+.w-32{
+	width: 8rem;
+}
+.w-36{
+	width: 9rem;
+}
 .max-w-6xl{
 	max-width: 72rem;
 }
@@ -1508,6 +1520,11 @@ body{
 	margin-right: calc(0.5rem * var(--tw-space-x-reverse));
 	margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-x-2\.5 > :not([hidden]) ~ :not([hidden]){
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.625rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.625rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden{
 	overflow: hidden;
 }
@@ -1585,6 +1602,12 @@ body{
 	--tw-bg-opacity: 1;
 	background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
+.bg-primary-100{
+	background-color: var(--primary-100);
+}
+.bg-primary-500{
+	background-color: var(--primary-500);
+}
 .bg-cover{
 	background-size: cover;
 }
@@ -1614,6 +1637,9 @@ body{
 }
 .p-5{
 	padding: 1.25rem;
+}
+.p-0{
+	padding: 0px;
 }
 .px-0{
 	padding-left: 0px;
@@ -1654,6 +1680,22 @@ body{
 .py-5{
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
+}
+.py-3{
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+}
+.px-3{
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+}
+.py-1{
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+.py-1\.5{
+	padding-top: 0.375rem;
+	padding-bottom: 0.375rem;
 }
 .pb-4{
 	padding-bottom: 1rem;
@@ -1702,6 +1744,9 @@ body{
 .font-semibold{
 	font-weight: 600;
 }
+.font-normal{
+	font-weight: 400;
+}
 .leading-5{
 	line-height: 1.25rem;
 }
@@ -1745,6 +1790,14 @@ body{
 .text-zinc-800{
 	--tw-text-opacity: 1;
 	color: rgb(39 39 42 / var(--tw-text-opacity));
+}
+.text-purple-500{
+	--tw-text-opacity: 1;
+	color: rgb(168 85 247 / var(--tw-text-opacity));
+}
+.text-indigo-500{
+	--tw-text-opacity: 1;
+	color: rgb(99 102 241 / var(--tw-text-opacity));
 }
 .opacity-0{
 	opacity: 0;
@@ -2341,6 +2394,9 @@ li.main-menu-item.current-menu-item.active{
 	.md\:w-60{
 		width: 15rem;
 	}
+	.md\:w-full{
+		width: 100%;
+	}
 	.md\:scale-\[106\%\]{
 		--tw-scale-x: 106%;
 		--tw-scale-y: 106%;
@@ -2351,6 +2407,9 @@ li.main-menu-item.current-menu-item.active{
 	}
 	.md\:flex-row{
 		flex-direction: row;
+	}
+	.md\:justify-end{
+		justify-content: flex-end;
 	}
 	.md\:gap-y-16{
 		row-gap: 4rem;

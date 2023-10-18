@@ -24,9 +24,22 @@ if (!defined('ABSPATH')) {
 
 
 <!-- start:footer -->
-<footer id="footer" class="relative lg:px-4 sm:px-5 xs:px-5 px-4 mx-auto max-w-6xl border-x bg-white overflow-hidden">
+<footer id="footer" class="relative porse lg:px-4 sm:px-5 xs:px-5 px-4 py-5 pb-10 mx-auto max-w-6xl border-x bg-white overflow-hidden">
     <img class="w-full h-auto py-4 lg:scale-[103%] md:scale-[106%] scale-[112%]" src="<?php echo url("img/footer.png"); ?>" alt="">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi eaque quos quidem in voluptas magnam deserunt, soluta quod optio accusantium deleniti corrupti cum possimus rerum. Minus dolores nesciunt animi!</p>
+    <div class="relative w-full py-3 flex justify-between items-center">
+        <div class="relative">
+            <p class="text-sm font-normal"><span class="font-medium">Last update:</span> <?php echo date("Y-m-d", strtotime("-1 months ago")) ?></p>
+
+        </div>
+        <div class="relative w-full flex justify-end max-w-xs">
+            <div class="relative">
+                <p class="lead text-xs p-0 m-0">
+                    Developed By
+                    <a class="text-xs font-semibold text-indigo-500" href="https://awesomecoder.dev">Mohammad Ibrahim</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </footer>
 <!-- end:footer -->
 

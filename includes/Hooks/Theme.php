@@ -102,14 +102,14 @@ add_theme_support("custom-background");
  * @since    1.0.0
  */
 
- add_theme_support('customize-selective-refresh-widgets');
+add_theme_support('customize-selective-refresh-widgets');
 
- /**
-  * Register the header theme support for the admin area.
-  *
-  * @since    1.0.0
-  */
- // add_theme_support("custom-header");
+/**
+ * Register the header theme support for the admin area.
+ *
+ * @since    1.0.0
+ */
+// add_theme_support("custom-header");
 
 
 /**

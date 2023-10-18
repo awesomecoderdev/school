@@ -29,11 +29,18 @@
  */
 
 // Step 1: Create a function to display the custom field
-function custom_settings_field()
+function school_address_field()
 {
-    $custom_field_value = get_option('school_address'); // Retrieve the saved value
+    $school_address = get_option('school_address'); // Retrieve the saved value
     // Output the HTML for your custom field
-    echo '<input class="regular-text" placeholder="Enter Schools Address" type="text" id="school_address" name="school_address" value="' . esc_attr($custom_field_value) . '" />';
+    echo '<input class="regular-text" placeholder="Enter Schools Address" type="text" id="school_address" name="school_address" value="' . esc_attr($school_address) . '" />';
+}
+
+function school_phone_field()
+{
+    $school_phone = get_option('school_phone'); // Retrieve the saved value
+    // Output the HTML for your custom field
+    echo '<input class="regular-text" placeholder="Enter Schools Phone" type="text" id="school_phone" name="school_phone" value="' . esc_attr($school_phone) . '" />';
 }
 
 function add_school_address_to_general_settings()
@@ -41,7 +48,7 @@ function add_school_address_to_general_settings()
     add_settings_field(
         'school_address',
         __("School Address", "school"),
-        'custom_settings_field',
+        'school_address_field',
         'general',
         'default',
         array(
@@ -49,7 +56,20 @@ function add_school_address_to_general_settings()
         )
     );
 
+    add_settings_field(
+        'school_phone',
+        __("School Contact Phone", "school"),
+        'school_phone_field',
+        'general',
+        'default',
+        array(
+            'label_for' => 'school_phone',
+        )
+    );
+
+
     register_setting('general', 'school_address');
+    register_setting('general', 'school_phone');
 }
 add_action('admin_init', 'add_school_address_to_general_settings');
 
