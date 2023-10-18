@@ -33,14 +33,26 @@ if (!defined('ABSPATH')) {
                 <?php if (have_posts()) : ?>
                     <div class="relative grid gap-4">
                         <?php while (have_posts()) : the_post(); ?>
-                            <div class="relative flex bg-zinc-50/50 p-4 shadow border border-slate-200/50">
-                                <div class="relative w-24 h-24">
-                                    <a class="relative w-24 h-24 block" href="<?php the_permalink(); ?>">
-                                        <img class="relative w-20 h-20 rounded-full drop-shadow-lg" src="<?php echo get_the_thumbnail_url() ; ?>" alt="<?php the_title(); ?>">
-                                    </a>
+                            <div class="relative flex md:flex-row flex-col bg-zinc-50/50 shadow border border-slate-200/50">
+                                <div class="relative md:w-60 w-full min-h-[10rem] h-full bg-cover bg-center bg-no-repeat" style="background-image: url(<?php echo get_the_thumbnail_url(); ?>);">
+                                    <!-- <a class="relative w-24 h-24 block" href="<?php the_permalink(); ?>">
+                                        <img class="relative w-20 h-20 drop-shadow-lg" src="<?php echo get_the_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                                    </a> -->
                                 </div>
-                                <div class="relative">
-                                    <span class="line-clamp-1 font-semibold"><?php the_title() ?></span>
+                                <div class="relative w-full p-4 ">
+                                    <h3 class="line-clamp-1 font-semibold"><?php the_title() ?></h3>
+                                    <div class="relative pb-10">
+                                        <p class="lead line-clamp-2">
+                                            <?php echo strip_tags(get_the_content()); ?>
+                                        </p>
+                                    </div>
+                                    <div class="absolute bottom-4 right-4 w-full">
+                                        <a class=" flex justify-end" href="<?php echo get_the_permalink(); ?>">
+                                            <span class="text-xs font-semibold px-2 py-0.5 shadow line-clamp-1 bg-zinc-100 border border-slate-200/50 text-zinc-800 group-hover:text-primary-600 hover:text-primary-500">
+                                                <?php _e("Read more..", "school"); ?>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         <?php endwhile; ?>
@@ -51,16 +63,38 @@ if (!defined('ABSPATH')) {
                 <?php get_sidebar(); ?>
             </div>
         </div>
-    <?php else: ?>
+    <?php else : ?>
         <div id="contents" class="relative lg:overflow-x-hidden overflow-scroll">
             <?php if (have_posts()) : ?>
-                <?php while (have_posts()) : the_post(); ?>
-                    <?php the_content(); ?>
-                <?php endwhile; ?>
+                <div class="relative grid gap-4">
+                    <?php while (have_posts()) : the_post(); ?>
+                        <div class="relative flex md:flex-row flex-col bg-zinc-50/50 shadow border border-slate-200/50">
+                            <div class="relative md:w-60 w-full min-h-[10rem] h-full bg-cover bg-center bg-no-repeat" style="background-image: url(<?php echo get_the_thumbnail_url(); ?>);">
+                                <!-- <a class="relative w-24 h-24 block" href="<?php the_permalink(); ?>">
+                                        <img class="relative w-20 h-20 drop-shadow-lg" src="<?php echo get_the_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                                    </a> -->
+                            </div>
+                            <div class="relative w-full p-4 ">
+                                <h3 class="line-clamp-1 font-semibold"><?php the_title() ?></h3>
+                                <div class="relative pb-10">
+                                    <p class="lead line-clamp-2">
+                                        <?php echo strip_tags(get_the_content()); ?>
+                                    </p>
+                                </div>
+                                <div class="absolute bottom-4 right-4 w-full">
+                                    <a class=" flex justify-end" href="<?php echo get_the_permalink(); ?>">
+                                        <span class="text-xs font-semibold px-2 py-0.5 shadow line-clamp-1 bg-zinc-100 border border-slate-200/50 text-zinc-800 group-hover:text-primary-600 hover:text-primary-500">
+                                            <?php _e("Read more..", "school"); ?>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
             <?php endif; ?>
         </div>
     <?php endif; ?>
 </main>
 
 <?php get_footer(); ?>
-
