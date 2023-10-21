@@ -34,7 +34,7 @@ class Taxonomies
 		return self::$instance;
 	}
 
-    public $placeholder_image;
+	public $placeholder_image;
 
 
 	/**
@@ -91,7 +91,7 @@ class Taxonomies
 	 */
 	public function create_term($term_id, $tt_id = '', $taxonomy = '')
 	{
-		if ('category' !== $taxonomy && !taxonomy_is_product_attribute($taxonomy)) {
+		if ('category' !== $taxonomy) {
 			return;
 		}
 
